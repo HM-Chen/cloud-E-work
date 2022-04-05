@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxxx.server.mapper.TAdminMapper">
+    <resultMap id="BaseResultMap" type="com.xxxx.server.pojo.TAdmin">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="telephone" property="telephone" />
+        <result column="address" property="address" />
+        <result column="enabled" property="enabled" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="user_face" property="user_face" />
+        <result column="remark" property="remark" />
+    </resultMap>
+
+    <resultMap id="AdminWithRole" type="com.xxxx.server.pojo.TAdmin" extends="BaseResultMap">
+        <collection property="tRoles" ofType="com.xxxx.server.pojo.TRole">
+            <id column="rid" property="id" />
+            <result column="rname" property="name" />
+            <result column="rname_zh" property="name_zh" />
+        </collection>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, name, phone, telephone, address, enabled, username, password, user_face, remark
+    </sql>
+
+    <select id="getAllAdmins" resultMap="AdminWithRole">
+        select
+            a.*,
+               r.id AS rid,
+               r.`name` AS rname,
+               r.name_zh As rname_zh
+        FROM
+            t_admin a
+            LEFT JOIN t_admin_role ar ON a.id = ar.admin_id
+            LEFT JOIN t_role r ON r.id = ar.rid
+        WHERE
+            a.id != #{id}
+            <if test="null!=keywords and ''!=keywords">
+                AND a.`name` LIKE CONCAT('%', "#{keywords}", "%")
+            </if>
+        ORDER BY
+            a.id
+    </select>
+
+
+</mapper>

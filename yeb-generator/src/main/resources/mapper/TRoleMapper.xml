@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxxx.mapper.TRoleMapper">
+    <resultMap id="BaseResultMap" type="com.xxxx.pojo.TRole">
+        <id column="rid" property="id" />
+        <result column="name" property="name" />
+        <result column="name_zh" property="name_zh" />
+    </resultMap>
+
+    <sql id="Base_Colum_List">
+        id, name, name_zh
+    </sql>
+
+    <select id="getTRoles" resultMap="BaseResultMap">
+        SELECT
+            r.id,
+            r.name,
+            r.name_zh
+        FROM
+            t_role AS r
+                LEFT JOIN t_admin_role AS ar ON r.id = ar.id
+        WHERE
+            ar.admin_id = #{admin_id}
+
+
+    </select>
+
+</mapper>

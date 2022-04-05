@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxxx.server.mapper.TEmployeeMapper">
+    <resultMap id="BaseResultMap" type="com.xxxx.server.pojo.TEmployee">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="gender" property="gender" />
+        <result column="birthday" property="birthday" />
+        <result column="id_card" property="id_card" />
+        <result column="wedlock" property="wedlock" />
+        <result column="nation_id" property="nation_id" />
+        <result column="native_place" property="native_place" />
+        <result column="email" property="email" />
+        <result column="phone" property="phone" />
+        <result column="address" property="address" />
+        <result column="department_id" property="department_id" />
+        <result column="job_level_id" property="job_level_id" />
+        <result column="pos_id" property="pos_id" />
+        <result column="engage_form" property="engage_form" />
+        <result column="tiptop_degree" property="tiptop_degree" />
+        <result column="specialty" property="specialty" />
+        <result column="school" property="school" />
+        <result column="begin_date" property="begin_date" />
+        <result column="work_state" property="work_state" />
+        <result column="work_id" property="work_id" />
+        <result column="contract_term" property="contract_term" />
+        <result column="conversion_time" property="conversion_time" />
+        <result column="notWork_date" property="notWork_date" />
+        <result column="begin_contract" property="begin_contract" />
+        <result column="end_contract" property="end_contract" />
+        <result column="work_age" property="work_age" />
+        <result column="salary_id" property="salary_id" />
+
+    </resultMap>
+
+    <resultMap id="EmployeeInfo" type="com.xxxx.server.pojo.TEmployee" extends="BaseResultMap">
+        <association property="nation" javaType="com.xxxx.server.pojo.TNation">
+            <id column="nid" property="id" />
+            <result column="nname" property="name" />
+        </association>
+        <association property="politicsStatus" javaType="com.xxxx.server.pojo.TPoliticsStatus">
+            <id column="pid" property="id" />
+            <result column="pname" property="name" />
+        </association>
+        <association property="department" javaType="com.xxxx.server.pojo.TDepartment">
+            <id column="did" property="id" />
+            <result column="dname" property="name" />
+        </association>
+        <association property="joblevel" javaType="com.xxxx.server.pojo.TJoblevel">
+            <id column="jid" property="id" />
+            <result column="jname" property="name" />
+        </association>
+        <association property="position" javaType="com.xxxx.server.pojo.TPosition">
+            <id column="pos_id" property="id" />
+            <result column="pos_name" property="name" />
+        </association>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, name, gender, birthday, id_card, wedlock, nation_id, native_place, email
+, phone, address, department_id, job_level_id, pos_id, engage_form, tiptop_degree, specialty, school, begin_date
+, work_state, work_id, contract_term, conversion_time, notWork_date, begin_contract, end_contract, work_age, salary_id
+    </sql>
+
+    <select id="getEmployeeByPage" resultMap="EmployeeInfo">
+        select
+        e.*,
+        n.id AS nid,
+        n.`name` AS nname,
+        p.id AS pid,
+        p.`name` AS pname,
+        d.id AS did,
+        d.`name` AS dname,
+        j.id AS jid,
+        j.`name` AS jname,
+        pos.id AS pos_id,
+        pos.`name` AS pos_name
+        FROM
+        t_employee e,
+        t_nation n,
+        t_politics_status p,
+        t_department d,
+        t_joblevel j,
+        t_position pos
+        WHERE
+        e.nation_id = n.id
+        AND
+        e.politic_id = p.id
+        AND
+        e.department_id = d.id
+        AND
+        e.job_level_id = j.id
+        AND
+        e.pos_id = pos.id
+        AND e.`name` LIKE CONCAT('%','王','%')
+        <if test="null!=tEmployee.name and ''!=tEmployee.name">
+            AND e.`name` LIKE CONCAT('%', #{tEmployee.name}, '%')
+        </if>
+        <if test="null!=tEmployee.politic_id">
+            AND e.politic_id = #{tEmployee.politic_id}
+        </if>
+        <if test="null!=tEmployee.nation_id">
+            AND e.nation_id = #{tEmployee.nation_id}
+        </if>
+        <if test="null!=tEmployee.job_level_id">
+            AND e.job_level_id = #{tEmployee.job_level_id}
+        </if>
+        <if test="null!=tEmployee.pos_id">
+            AND e.pos_id = #{tEmployee.pos_id}
+        </if>
+        <if test="null!=tEmployee.engage_form and ''!=employee.engage_form">
+            AND e.engage_form = #{tEmployee.engage_form}
+        </if>
+        <if test="null!=tEmployee.department_id">
+            AND e.department_id = #{tEmployee.department_id}
+        </if>
+        <if test="null!=beginDateScope and 2==beginDateScope.length">
+            AND e.begin_date BETWEEN #{beginDateScope[0]} AND #{beginDateScope[1]}
+        </if>
+        ORDER BY
+        e.id
+    </select>
+
+    <select id="getEmployee" resultMap="EmployeeInfo">
+        select
+        e.*,
+        n.id AS nid,
+        n.`name` AS nname,
+        p.id AS pid,
+        p.`name` AS pname,
+        d.id AS did,
+        d.`name` AS dname,
+        j.id AS jid,
+        j.`name` AS jname,
+        pos.id AS pos_id,
+        pos.`name` AS pos_name
+        FROM
+        t_employee e,
+        t_nation n,
+        t_politics_status p,
+        t_department d,
+        t_joblevel j,
+        t_position pos
+        WHERE
+        e.nation_id = n.id
+        AND
+        e.politic_id = p.id
+        AND
+        e.department_id = d.id
+        AND
+        e.job_level_id = j.id
+        AND
+        e.pos_id = pos.id
+        <if test="null!=id">
+            AND e.id = #{id}
+        </if>
+        ORDER BY
+            e.id
+    </select>
+
+</mapper>
