@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 
 @SpringBootApplication
-//@Configuration
+@Configuration
 @MapperScan(basePackages = "com.xxxx.server.mapper")
 //@EnableScheduling
 public class Yebapplication {

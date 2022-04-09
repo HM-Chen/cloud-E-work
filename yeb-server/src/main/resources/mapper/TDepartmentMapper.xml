@@ -34,7 +34,7 @@
         WHERE parent_Id = #{parent_Id}
     </select>
 
-    <select id="getAllDepartments" resultMap="DepartmentWithChildren">
+    <select id="getAllDepartments" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List" />
         FROM t_department
