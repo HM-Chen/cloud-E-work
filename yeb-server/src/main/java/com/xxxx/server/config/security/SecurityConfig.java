@@ -68,14 +68,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .anyRequest()
                 .authenticated()
-                .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
-                    @Override
-                    public <O extends FilterSecurityInterceptor> O postProcess(O object) {
-                        object.setAccessDecisionManager(customUrlDecisionManager);
-                        object.setSecurityMetadataSource(customFilter);
-                        return object;
-                    }
-                })
+//                .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
+//                    @Override
+//                    public <O extends FilterSecurityInterceptor> O postProcess(O object) {
+//                        object.setAccessDecisionManager(customUrlDecisionManager);
+//                        object.setSecurityMetadataSource(customFilter);
+//                        return object;
+//                    }
+//                })
                 .and()
                 .headers()
                 .cacheControl();

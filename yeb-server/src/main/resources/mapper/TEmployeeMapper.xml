@@ -34,7 +34,7 @@
     </resultMap>
 
     <resultMap id="EmployeeInfo" type="com.xxxx.server.pojo.TEmployee" extends="BaseResultMap">
-        <association property="nation" javaType="com.xxxx.server.pojo.TNation">
+        <association property="nnation" javaType="com.xxxx.server.pojo.TNation">
             <id column="nid" property="id" />
             <result column="nname" property="name" />
         </association>
@@ -62,7 +62,7 @@
 , work_state, work_id, contract_term, conversion_time, notWork_date, begin_contract, end_contract, work_age, salary_id
     </sql>
 
-    <select id="getEmployeeByPage" resultMap="EmployeeInfo">
+    <select id="getEmployeeByPage" resultMap="BaseResultMap">
         select
         e.*,
         n.id AS nid,
@@ -92,7 +92,7 @@
         e.job_level_id = j.id
         AND
         e.pos_id = pos.id
-        AND e.`name` LIKE CONCAT('%','王','%')
+--         AND e.`name` LIKE CONCAT('%','王','%')
         <if test="null!=tEmployee.name and ''!=tEmployee.name">
             AND e.`name` LIKE CONCAT('%', #{tEmployee.name}, '%')
         </if>
@@ -108,7 +108,7 @@
         <if test="null!=tEmployee.pos_id">
             AND e.pos_id = #{tEmployee.pos_id}
         </if>
-        <if test="null!=tEmployee.engage_form and ''!=employee.engage_form">
+        <if test="null!=tEmployee.engage_form and ''!=tEmployee.engage_form">
             AND e.engage_form = #{tEmployee.engage_form}
         </if>
         <if test="null!=tEmployee.department_id">
@@ -121,7 +121,7 @@
         e.id
     </select>
 
-    <select id="getEmployee" resultMap="EmployeeInfo">
+    <select id="getEmployee" resultMap="BaseResultMap">
         select
         e.*,
         n.id AS nid,
