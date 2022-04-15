@@ -46,7 +46,7 @@ public class TMenuController {
             System.out.println("从数据库查询");
             menus = tMenuService.getMenusByAdminId();
             valueOperations.set("menu_"+adminId,menus);
-            redisTemplate.expire("menu_"+adminId,30000, TimeUnit.MILLISECONDS);
+            redisTemplate.expire("menu_"+adminId,60*60*24, TimeUnit.MILLISECONDS);
         }else{
             System.out.println("从redis查询");
         }
