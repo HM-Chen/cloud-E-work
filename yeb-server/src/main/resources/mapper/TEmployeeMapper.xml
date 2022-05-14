@@ -123,9 +123,9 @@
 
     <select id="getEmployee" resultMap="BaseResultMap">
         select
-        e.*
+        *
         FROM
-        t_employee e,
+        t_employee e
         WHERE
             e.id = #{id}
     </select>

@@ -58,9 +58,9 @@ public class MailReceiver {
             helper.setSentDate(new Date());
             Context context = new Context();
             context.setVariable("name", tEmployee.getName());
-            context.setVariable("posName", tEmployee.getTPosition().getName());
-            context.setVariable("joblevelName",tEmployee.getTJoblevel().getName());
-            context.setVariable("departmentName", tEmployee.getTDepartment().getName());
+//            context.setVariable("posName", tEmployee.getTPosition().getName());
+//            context.setVariable("joblevelName",tEmployee.getTJoblevel().getName());
+//            context.setVariable("departmentName", tEmployee.getTDepartment().getName());
             String mail = templateEngine.process("mail", context);
             helper.setText(mail,true);
             javaMailSender.send(msg);

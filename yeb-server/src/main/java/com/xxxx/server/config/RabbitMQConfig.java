@@ -32,7 +32,7 @@ public class RabbitMQConfig {
             String msgId = data.getId();
             if(ack){
                 LOGGER.info("{}==========>消息发送成功",msgId);
-                itMailLogService.update(new UpdateWrapper<TMailLog>().set("status",1).eq("msgId",msgId));
+                itMailLogService.update(new UpdateWrapper<TMailLog>().set("status",1).eq("msg_id",msgId));
             } else{
                 LOGGER.error("{}==========>消息发送失败",msgId);
             }

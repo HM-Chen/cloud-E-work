@@ -56,11 +56,11 @@ public class TEmployeeServiceImpl extends ServiceImpl<TEmployeeMapper, TEmployee
 
     @Override
     public RespBean addEmp(TEmployee tEmployee) {
-        LocalDateTime beginContract = tEmployee.getBegin_contract();
-        LocalDateTime endContract = tEmployee.getEnd_contract();
-        long days = beginContract.until(endContract, ChronoUnit.DAYS);
-        DecimalFormat decimalFormat = new DecimalFormat("##.00");
-        tEmployee.setContract_term(Double.parseDouble(decimalFormat.format(days/365.00)));
+//        LocalDateTime beginContract = tEmployee.getBegin_contract();
+//        LocalDateTime endContract = tEmployee.getEnd_contract();
+//        long days = beginContract.until(endContract, ChronoUnit.DAYS);
+//        DecimalFormat decimalFormat = new DecimalFormat("##.00");
+//        tEmployee.setContract_term(Double.parseDouble(decimalFormat.format(days/365.00)));
         if(1 == tEmployeeMapper.insert(tEmployee)){
             TEmployee emp = tEmployeeMapper.getEmployee(tEmployee.getId()).get(0);
             //数据库记录发送的消息
