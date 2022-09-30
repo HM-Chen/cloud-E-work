@@ -12,7 +12,7 @@
   4. 数据库：MySQL  
   5. 数据库连接：druid  
   6. 日志：log4j2  
-  7. Mapper：tk.Mybatis  
+  7. Mapper：Mybatis  
   8. 分页：pageHelper  
   9. 全局异常 & 统一返回：GlobalException & CommonResponse  
   10. API文档：Swagger2  
