@@ -20,6 +20,8 @@ import java.io.IOException;
 public class CaptchaController {
     @Autowired
     private DefaultKaptcha defaultKaptcha;
+
+
     @ApiOperation(value = "验证码")
     @GetMapping(value = "/captcha", produces = "image/jpeg")
     public void captcha(HttpServletRequest request, HttpServletResponse response){

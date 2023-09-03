@@ -4,6 +4,7 @@
     <resultMap id="BaseResultMap" type="com.xxxx.server.pojo.TAdmin">
         <id column="id" property="id" />
         <result column="name" property="name" />
+        <result column="phone" property="phone" />
         <result column="telephone" property="telephone" />
         <result column="address" property="address" />
         <result column="enabled" property="enabled" />

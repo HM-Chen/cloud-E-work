@@ -3,8 +3,8 @@ package com.xxxx.server.controller;
 
 import com.xxxx.server.pojo.AdminLoginParam;
 import com.xxxx.server.pojo.RespBean;
-import com.xxxx.server.service.ITAdminService;
 import com.xxxx.server.pojo.TAdmin;
+import com.xxxx.server.service.ITAdminService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +20,7 @@ import java.security.Principal;
 public class LoginController {
     @Autowired
     private ITAdminService itAdminService;
+
 
     @ApiOperation(value = "登录之后返回true")
     @PostMapping("/login")

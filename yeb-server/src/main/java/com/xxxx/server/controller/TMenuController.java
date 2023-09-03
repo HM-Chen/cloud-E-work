@@ -29,7 +29,7 @@ import java.util.concurrent.TimeUnit;
 
 @Api(tags = "MenuController")
 @RestController
-@RequestMapping("/cfg")
+@RequestMapping("/system/cfg")
 public class TMenuController {
     @Autowired
     private TMenuServiceImpl tMenuService;
